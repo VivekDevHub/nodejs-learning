@@ -4,7 +4,7 @@
 let express = require("express");
 const connectDb = require("./config/db");
 
-connectDb();
+connectDb();  
 
 let app = express();
 app.use(express.json());
