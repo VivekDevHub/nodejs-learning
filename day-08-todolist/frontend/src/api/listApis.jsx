@@ -33,4 +33,14 @@ const deleteList = async (id) => {
   }
 };
 
-export { fetchAllLists, createNewList, deleteList };
+const updateList = async (id, updatedData) => {
+  try {
+    const res = await axios.put(`${BASE_URL}/update/${id}`, updatedData);
+      alert("Updated Successfully");
+    return res.data;
+  } catch (error) {
+    console.log("Error in updating list:", error.message);
+  }
+};
+
+export { fetchAllLists, createNewList, deleteList, updateList };
