@@ -2,16 +2,16 @@ const ListModel = require("../models/list.model");
 
 const createListController = async (req, res) => {
   try {
-    let { name, description } = req.body;
+    let { taskName, description } = req.body;
 
-    if (!name || !description) {
+    if (!taskName || !description) {
       return res.status(400).json({
         message: "All fields are required",
       });
     }
 
     let newList = await ListModel.create({
-      taskName: name,
+      taskName: taskName,
       description,
     });
 
@@ -57,9 +57,10 @@ const updateListController = async (req, res) => {
       });
     }
 
-    let { name, description } = req.body;
+    let { taskName, description } = req.body;
+console.log(req.body,"server me hai -===-=-=-=")
 
-    if (!name || !description) {
+    if (!taskName || !description) {
       return res.status(400).json({
         message: "All fields required",
       });
@@ -68,19 +69,23 @@ const updateListController = async (req, res) => {
     let updatedList = await ListModel.findByIdAndUpdate(
       listId,
       {
-        taskName: name,
+        taskName: taskName,
         description,
       },
       {
         new: true,
       },
     );
-
+    if(!updatedList){
+      return res.status(404).json({
+        message:"List not Found -=-=-="
+      })
+    }
     return res.status(200).json({
       message: "List updated successfully",
       list: updatedList,
     });
-  } catch (error) {
+  } catch (error) {    
     return res.status(500).json({
       message: "Internal server error",
     });
