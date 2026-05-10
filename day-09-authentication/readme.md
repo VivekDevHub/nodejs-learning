@@ -379,11 +379,15 @@ Backend Receives req.body
         ↓
 Validate Fields
         ↓
-Check Existing Email
+Check Existing Email using findOne({email})
         ↓
-Hash Password Using bcrypt
+Hash Password Using bcrypt.hash(password,10)
         ↓
-Store User in Database
+Store User in Database 
+        ↓
+Token Generation jwt.sign({id:newUser, JWT_KEY, expiresIn:"1h"})
+        ↓
+Save in Cookies  res.cookie("id_card",token)
         ↓
 Send Success Response
 ```
