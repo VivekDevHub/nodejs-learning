@@ -12,7 +12,7 @@ let fileSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 let FileModel = mongoose.model("files", fileSchema);
