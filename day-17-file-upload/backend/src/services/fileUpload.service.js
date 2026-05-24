@@ -21,7 +21,7 @@ let multipleUploadService = async (files) => {
   let uploadedFiles = await Promise.all(
     files.map(async (elem) => {
       return await sendFiles(elem.buffer, elem.originalname);
-    })
+    }),
   );
 
   let newFiles = await FileModel.create({
